@@ -1,0 +1,40 @@
+/* Add application styles & imports to this file! */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.content {
+    
+    padding: 10vh 25vw;
+}
+
+body {
+    font-family: "sofia-pro", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: bold;
+}
+
+body {
+    margin: 0;
+}
+
+.full {
+    display: block;
+}
+
+.xs {
+    margin-right: 15px;
+    width: 15%;
+}
+
+.sm {
+    width: 25%;
+}
+
+.dp {
+    margin-right: 15px;
+}
+
+body { margin: 10; }
