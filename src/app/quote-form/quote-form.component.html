@@ -4,11 +4,11 @@
   <h2>Contact information</h2>
   <mat-form-field class="dp">
     <input matInput placeholder="Name" formControlName="name">
-        <mat-error *ngIf="name.invalid && name.touched" class="has-text-danger">
+        <mat-error *ngIf="myForm['controls']?.name.invalid && name.touched" class="has-text-danger">
             *required
         </mat-error>
   </mat-form-field>    
-    
+ 
   <mat-form-field class="dp">
     <input matInput placeholder="Email" formControlName="email">
       <mat-error *ngIf="email.invalid && email.touched" class="has-text-danger">
@@ -39,15 +39,12 @@
                 <input matInput placeholder="Quantity" formControlName="quantity">
             </mat-form-field>
             <mat-form-field class="dp" >
-                    <mat-select placeholder="Material" [(value)]="selected" formControlName="material" (selectionChange)="thingyChanged('inshput', material)">
+                    <mat-select placeholder="Material" [(value)]="selected" formControlName="material">
                     <mat-option value="porcelain">Porcelain</mat-option>
                     <mat-option value="marble">Marble</mat-option>
                     <mat-option value="stone">Granite</mat-option>
                   </mat-select>
             </mat-form-field>
-            you select: {{selected}}
-            <img src="/CaptureX.JPG">
-            <div><i class="fas fa-award"></i></div>
             <button mat-raised-button type="button" color="warn" (click)="deleteTile(i)">Remove Tile</button>
             <br>
             <mat-form-field class="xs">
@@ -67,7 +64,7 @@
                <h2>Cuts required</h2>
               <div *ngFor="let cut of tile['controls'].cuts['controls']; let j=index" [formGroupName]="j">
                 <mat-form-field class="dp">
-                   <mat-select placeholder="Cut Type" formControlName="cutType">
+                   <mat-select placeholder="Cut Type" formControlName="cutType" (selectionChange)="thingyChanged('inshput', material)">
                     <mat-option value="c2s">Cut to size</mat-option>
                     <mat-option value="profile">Profile cut</mat-option>
                     <mat-option value="buildup">Build up and profile</mat-option>
@@ -77,6 +74,18 @@
                 <button mat-raised-button type="button" color="warn" (click)="deleteCut(i)">Remove Cut</button>
               </div>
             <button mat-raised-button type="button" color="primary" (click)="addCut(i)">Add Cut</button>
+            </div>
+                        <div [ngSwitch]="tile['controls'].material.value">
+              <span>
+              <svg width="10rem" height="10em" >
+                <rect width="100%" height="100%" fill="none" stroke="black" stroke-width="4" />
+                <circle cx="100%" cy="100%" r="150" fill="blue" stroke="black" />
+                <polygon points="120,0 240,225 0,225" fill="green"/>
+                <text *ngSwitchCase="'porcelain'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">porcelain!</text>
+                <text *ngSwitchCase="'marble'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">marble!</text>
+                <text *ngSwitchCase="'stone'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">stone!</text>
+              </svg>
+              </span>
             </div>
             <br><br><br>
         </div>
@@ -91,9 +100,10 @@
 
 <br>
 <div *ngIf="success" class="notification is-success">
-    Yay! We received your submission
+    Thank You! We received your submission.
 </div>
 
 <br><hr><br><br>
 x{{ events }}x
   Value: {{ myForm.value | json }}
+  <br>

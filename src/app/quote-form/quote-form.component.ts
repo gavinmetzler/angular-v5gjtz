@@ -17,7 +17,7 @@ export class QuoteFormComponent implements OnInit {
   loading = false;
   success = false;
 
-  events = '';
+  events = 'poi';
 
   thongyChanged(type: string, event: MatDatepickerInputEvent<Date>) {
     this.events = 'gesuntheight';
@@ -48,10 +48,10 @@ export class QuoteFormComponent implements OnInit {
   addTile() {
 
     const tile = this.fb.group({ 
-      quantity: [],
-      material: [],
-      length: [],
-      width: [],
+      quantity: [10],
+      material: ['bk'],
+      length: [600],
+      width: [600],
       thickness: [],
       cuts: this.fb.array([])
       // TODO: grain
