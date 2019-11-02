@@ -20,6 +20,7 @@
     <input matInput placeholder="Company" formControlName="company">
   </mat-form-field>  
   <br>
+
   <mat-form-field class="dp">
       <input matInput [matDatepicker]="reqDate" placeholder="Date required" (dateInput)="thongyChanged('input', $event)">
       <mat-datepicker-toggle matSuffix [for]="reqDate"></mat-datepicker-toggle>
@@ -48,16 +49,21 @@
             <button mat-raised-button type="button" color="warn" (click)="deleteTile(i)">Remove Tile</button>
             <br>
             <mat-form-field class="xs">
-                <input matInput placeholder="Length (mm)" formControlName="length">
+                <input matInput type="number" placeholder="Length (mm)" formControlName="length">
             </mat-form-field>
             
             <mat-form-field class="xs">
-                <input matInput placeholder="Width (mm)" formControlName="width">
+                <input matInput type="number" placeholder="Width (mm)" formControlName="width">
             </mat-form-field>
-            
             <mat-form-field class="xs">
                 <input matInput placeholder="Thickness (mm)" formControlName="thickness">
+                      <mat-error *ngIf="tile['controls'].thickness.invalid && tile['controls'].thickness.touched" class="has-text-danger">
+                        *Thickness must be 40mm or less
+                      </mat-error>
             </mat-form-field>
+              <div *ngIf="tile.errors?.widthGreaterThanLength && (myForm.touched || myForm.dirty)" class="cross-validation-error-message alert alert-danger">
+                Length must be equal to or greater than width.
+             </div>
 
            
             <div formArrayName="cuts">

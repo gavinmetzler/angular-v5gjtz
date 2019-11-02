@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import {FormGroup, FormBuilder, FormArray, Validators, FormControl  } from '@angular/forms';
+import {FormGroup, FormBuilder, FormArray, Validators, FormControl, ValidatorFn, AbstractControl, ValidationErrors  } from '@angular/forms';
 import {MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatSelectChange } from '@angular/material/select';
 
@@ -33,11 +33,11 @@ export class QuoteFormComponent implements OnInit {
     this.myForm = this.fb.group ({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      company: '',
+      company: ['', [Validators.required, forbiddenNameValidator(/bob/i)]],
       orderNum: '',
       reqDate: '',
       tiles: this.fb.array([])
-    })
+    },{ validators: identityRevealedValidator })
     this.addTile();
   }
 
@@ -48,14 +48,14 @@ export class QuoteFormComponent implements OnInit {
   addTile() {
 
     const tile = this.fb.group({ 
-      quantity: [10],
-      material: ['bk'],
-      length: [600],
-      width: [600],
-      thickness: [],
+      quantity: [],
+      material: [],
+      length: [],
+      width: [],
+      thickness: [null,[Validators.required, Validators.max(40)]],
       cuts: this.fb.array([])
       // TODO: grain
-    })
+    },{ validators: lengthWidthValidator })
 
     this.tileForms.push(tile);
   }
@@ -103,3 +103,22 @@ export class QuoteFormComponent implements OnInit {
     return this.myForm.get('email');
   }
 }
+
+export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const forbidden = nameRe.test(control.value);
+    return forbidden ? {'forbiddenName': {value: control.value}} : null;
+  }
+}
+
+export const identityRevealedValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+  const name = control.get('name');
+  const alterEgo = control.get('orderNum');
+  return name && alterEgo && name.value === alterEgo.value ? { 'identityRevealed': true } : null;
+};
+
+export const lengthWidthValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+  const length = control.get('length');
+  const width = control.get('width');
+  return length && width && length.value < width.value ? { 'widthGreaterThanLength': true } : null;
+};
