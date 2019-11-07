@@ -1,4 +1,4 @@
-<h1>Tile Cutting Order Form</h1>
+<h1>Tile Cutting Order Form v0.7</h1>
 <form [formGroup]="myForm" [hidden]="success" (ngSubmit)="submitHandler()">
   <hr>
   <h2>Contact information</h2>
@@ -56,7 +56,7 @@
                 <input matInput type="number" placeholder="Width (mm)" formControlName="width">
             </mat-form-field>
             <mat-form-field class="xs">
-                <input matInput placeholder="Thickness (mm)" formControlName="thickness">
+                <input matInput type="number" placeholder="Thickness (mm)" formControlName="thickness">
                       <mat-error *ngIf="tile['controls'].thickness.invalid && tile['controls'].thickness.touched" class="has-text-danger">
                         *Thickness must be 40mm or less
                       </mat-error>
@@ -64,6 +64,13 @@
               <div *ngIf="tile.errors?.widthGreaterThanLength && (myForm.touched || myForm.dirty)" class="cross-validation-error-message alert alert-danger">
                 Length must be equal to or greater than width.
              </div>
+             <br>
+            <mat-radio-group formControlName="grain" aria-label="Select an option" class="xs">
+                <mat-radio-button class="xs" value="noGrain">No Grain</mat-radio-button>
+                <mat-radio-button class="xs" value="withLength">Grain Along Length</mat-radio-button>
+                <mat-radio-button value="withWidth">Grain Along Width</mat-radio-button>
+            </mat-radio-group>
+
 
            
             <div formArrayName="cuts">
@@ -78,21 +85,24 @@
                   </mat-select>
                 </mat-form-field>
                 <button mat-raised-button type="button" color="warn" (click)="deleteCut(i)">Remove Cut</button>
+
+                <div [ngSwitch]="cut['controls'].cutType.value">
+                  <span>
+                    <svg width="10rem" height="10em" >
+                      <rect width="100%" height="100%" fill="none" stroke="black" stroke-width="4" />
+                      <circle cx="100%" cy="100%" r="150" fill="blue" stroke="black" />
+                      <polygon points="120,0 240,225 0,225" fill="green"/>
+                      <text *ngSwitchCase="'c2s'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">porcelain!</text>
+                      <text *ngSwitchCase="'profile'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">marble!</text>
+                      <text *ngSwitchCase="'buildup'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">stone!</text>
+                    </svg>
+                  </span>
+                </div>
+
               </div>
             <button mat-raised-button type="button" color="primary" (click)="addCut(i)">Add Cut</button>
             </div>
-                        <div [ngSwitch]="tile['controls'].material.value">
-              <span>
-              <svg width="10rem" height="10em" >
-                <rect width="100%" height="100%" fill="none" stroke="black" stroke-width="4" />
-                <circle cx="100%" cy="100%" r="150" fill="blue" stroke="black" />
-                <polygon points="120,0 240,225 0,225" fill="green"/>
-                <text *ngSwitchCase="'porcelain'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">porcelain!</text>
-                <text *ngSwitchCase="'marble'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">marble!</text>
-                <text *ngSwitchCase="'stone'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">stone!</text>
-              </svg>
-              </span>
-            </div>
+
             <br><br><br>
         </div>
 

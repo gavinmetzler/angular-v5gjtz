@@ -52,12 +52,13 @@ export class QuoteFormComponent implements OnInit {
       material: [],
       length: [],
       width: [],
+      grain: ['noGrain'],
       thickness: [null,[Validators.required, Validators.max(40)]],
       cuts: this.fb.array([])
-      // TODO: grain
     },{ validators: lengthWidthValidator })
 
     this.tileForms.push(tile);
+    this.addCut(this.tileForms.length-1);
   }
 
   deleteTile(i) {
