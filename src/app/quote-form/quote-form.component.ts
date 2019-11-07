@@ -71,7 +71,8 @@ export class QuoteFormComponent implements OnInit {
     const cut = this.fb.group({ 
       cutType: [],
       dim1: [],
-      dim2: []
+      dim2: [],
+      profileType: [],
       // TODO: flesh out cut data
     });
 

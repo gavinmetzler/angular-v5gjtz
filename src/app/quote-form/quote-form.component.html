@@ -79,15 +79,34 @@
                 <mat-form-field class="dp">
                    <mat-select placeholder="Cut Type" formControlName="cutType" (selectionChange)="thingyChanged('inshput', material)">
                     <mat-option value="c2s">Cut to size</mat-option>
-                    <mat-option value="profile">Profile cut</mat-option>
-                    <mat-option value="buildup">Build up and profile</mat-option>
+                    <mat-option value="profile">Profile</mat-option>
                     <mat-option value="groove">Grooves</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <button mat-raised-button type="button" color="warn" (click)="deleteCut(i)">Remove Cut</button>
 
                 <div [ngSwitch]="cut['controls'].cutType.value">
-                  <span>
+                  <div *ngSwitchCase="'c2s'">
+                    <mat-form-field class="xs">
+                      <input matInput type="number" placeholder="Width (mm)" formControlName="dim1">
+                    </mat-form-field>
+                    <mat-form-field class="xs">
+                      <input matInput type="number" placeholder="Length (mm)" formControlName="dim2">
+                    </mat-form-field>
+                  </div>
+
+                  <div *ngSwitchCase="'profile'">
+                    <mat-form-field class="dp">
+                      <mat-select placeholder="Profile Type" formControlName="profileType" (selectionChange)="thingyChanged('inshput', material)">
+                        <mat-option value="qtrRound">Quarter Round</mat-option>
+                        <mat-option value="halfRound">Half Round</mat-option>
+                        <mat-option value="doubleQtrRound">Buildup and Quarter Round</mat-option>
+                        <mat-option value="doubleHalfRound">Buildup and Half Round</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                 <!--- <span>
                     <svg width="10rem" height="10em" >
                       <rect width="100%" height="100%" fill="none" stroke="black" stroke-width="4" />
                       <circle cx="100%" cy="100%" r="150" fill="blue" stroke="black" />
@@ -96,7 +115,7 @@
                       <text *ngSwitchCase="'profile'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">marble!</text>
                       <text *ngSwitchCase="'buildup'" x="50" y="100" font-family="Verdana" font-size="45" fill="#445544" stroke="black" stroke-width="2">stone!</text>
                     </svg>
-                  </span>
+                  </span> --->
                 </div>
 
               </div>
