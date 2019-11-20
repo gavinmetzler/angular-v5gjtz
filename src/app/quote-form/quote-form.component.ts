@@ -73,6 +73,7 @@ export class QuoteFormComponent implements OnInit {
       dim1: [],
       dim2: [],
       profileType: [],
+      apronHeight: [],
       // TODO: flesh out cut data
     });
 

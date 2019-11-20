@@ -2,8 +2,15 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 .content {
-    
-    padding: 10vh 25vw;
+    padding: 0;
+    max-width: 50em;
+    margin: auto;
+}
+
+.tilesizer {
+    padding: 0;
+    max-width: 50em;
+    margin: auto;
 }
 
 body {
@@ -28,6 +35,7 @@ body {
     margin-right: 15px;
     width: 20%;
 }
+
 
 .sm {
     width: 25%;
