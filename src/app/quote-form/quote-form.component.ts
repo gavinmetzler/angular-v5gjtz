@@ -55,7 +55,7 @@ export class QuoteFormComponent implements OnInit {
       grain: ['noGrain'],
       thickness: [null,[Validators.required, Validators.max(40)]],
       cuts: this.fb.array([])
-    },{ validators: lengthWidthValidator })
+    })
 
     this.tileForms.push(tile);
     this.addCut(this.tileForms.length-1);
