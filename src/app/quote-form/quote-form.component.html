@@ -99,18 +99,19 @@ flip grain 'button' above image, size input on left and bottom.
             <div formArrayName="cuts">
                <h2>Work required</h2>
               <div *ngFor="let cut of tile['controls'].cuts['controls']; let j=index" [formGroupName]="j">
-           <!---     <mat-form-field class="dp">
+               <mat-form-field class="dp">
                    <mat-select placeholder="Cut Type" formControlName="cutType" (selectionChange)="thingyChanged('inshput', material)">
                     <mat-option value="c2s">Cut to size</mat-option>
                     <mat-option value="profile">Profile</mat-option>
+                    <mat-option value="cutandprofile">Cut to size and Profile</mat-option>
                     <mat-option value="groove">Grooves</mat-option>
                   </mat-select>
-                </mat-form-field> -->
-           <mat-radio-group formControlName="cutType" aria-label="Select an option" class="xs">
+                </mat-form-field> 
+           <!--<mat-radio-group formControlName="cutType" aria-label="Select an option" class="xs">
                 <mat-radio-button class="xs" value="c2s">Cut to Size</mat-radio-button>
                 <mat-radio-button class="xs" value="profile">Profile</mat-radio-button>
                 <mat-radio-button value="groove">Grooves</mat-radio-button>
-            </mat-radio-group>
+            </mat-radio-group>-->
 
                 <button mat-raised-button type="button" color="warn" (click)="deleteCut(i)">Remove Cut</button>
 
