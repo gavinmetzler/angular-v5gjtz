@@ -36,6 +36,10 @@ body {
     width: 10em;
 }
 
+.xss {
+    margin-right: 15px;
+    width: 6em;
+}
 
 .sm {
     width: 10em;

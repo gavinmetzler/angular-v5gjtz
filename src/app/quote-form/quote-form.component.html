@@ -63,15 +63,15 @@ flip grain 'button' above image, size input on left and bottom.
             <div *ngIf="[i]!=0" ><button mat-raised-button type="button" color="warn" (click)="deleteTile(i)">Remove Tile</button></div>
             <br>
 
-        <div class="tilesizer" style="height:200px; width:400px">
-          <div style="height:100%; width: 40%; text-align: center; border-style:none; float:left;"><div style=" padding-top:50%; "><mat-form-field class="xs">
-                <input matInput type="number" placeholder="Size A(mm)" formControlName="length">
+        <div class="tilesizer" style="height:14em; width:40em">
+          <div style="height:100%; width: 40%; text-align: center; border-style:none; float:left;"><div style="padding-top:30%; float:right "><mat-form-field class="xss">
+                <input matInput placeholder="Size A (mm)" formControlName="length">
             </mat-form-field></div></div>
           <div style="height:100%; width: 40%; text-align: center; border-style:solid; float:left">
              <div style="height: 180px; width: 100%; text-align: center;"></div>
              <div style="width: 100%; text-align: center;"> 
-              <mat-form-field class="dp xs">
-                <input matInput type="number" placeholder="(mm)" formControlName="width">
+              <mat-form-field class="dp xss">
+                <input matInput placeholder="Size B (mm)" formControlName="width">
               </mat-form-field></div>
           </div>
        </div>
@@ -80,6 +80,7 @@ flip grain 'button' above image, size input on left and bottom.
                 Length must be equal to or greater than width.
              </div>-->
              <br>
+             <!--
             <mat-radio-group formControlName="grain" aria-label="Select an option" class="xs">
                 <mat-radio-button class="xs" value="noGrain">No Grain</mat-radio-button>
                 <mat-radio-button class="xs" value="withLength">Grain Along Length</mat-radio-button>
@@ -93,9 +94,9 @@ flip grain 'button' above image, size input on left and bottom.
                 </svg>
             </span> 
             </div>
+-->
 
-
-           
+       <br>    
             <div formArrayName="cuts">
                <h2>Work required</h2>
               <div *ngFor="let cut of tile['controls'].cuts['controls']; let j=index" [formGroupName]="j">
