@@ -64,13 +64,21 @@ flip grain 'button' above image, size input on left and bottom.
             <br>
 
         <div class="tilesizer" style="height:14em; width:40em">
-          <div style="height:100%; width: 40%; text-align: center; border-style:none; float:left;"><div style="padding-top:30%; float:right "><mat-form-field class="xss">
+          <div style="height:100%; width: 30%; text-align: center; border-style:none; float:left;"><div style="padding-top:30%; float:right "><mat-form-field class="xss">
                 <input matInput placeholder="Size A (mm)" formControlName="length">
             </mat-form-field></div></div>
-          <div style="height:100%; width: 40%; text-align: center; border-style:solid; float:left">
-             <div style="height: 180px; width: 100%; text-align: center;"></div>
-             <div style="width: 100%; text-align: center;"> 
-              <mat-form-field class="dp xss">
+          <div style="height:100%; width: 60%; text-align: center; border-style:none; float:left">
+             <div style="height: 180px; width: 180px; border-style:solid; text-align: left;">
+               <div style="margin-left:50px;">Grain
+              <mat-radio-group formControlName="grain" aria-label="Select an option" class="xs">
+                  <mat-radio-button class="xs" value="noGrain">none</mat-radio-button>
+                  <mat-radio-button class="xs" value="withLength">||</mat-radio-button>
+                  <mat-radio-button class="xs" value="withWidth">=</mat-radio-button>
+              </mat-radio-group>
+              </div>
+             </div>
+             <div style="width: 100%; text-align: left;"> 
+              <mat-form-field class="dp xss" style="margin-left:20px;">
                 <input matInput placeholder="Size B (mm)" formControlName="width">
               </mat-form-field></div>
           </div>
@@ -81,11 +89,7 @@ flip grain 'button' above image, size input on left and bottom.
              </div>-->
              <br>
              <!--
-            <mat-radio-group formControlName="grain" aria-label="Select an option" class="xs">
-                <mat-radio-button class="xs" value="noGrain">No Grain</mat-radio-button>
-                <mat-radio-button class="xs" value="withLength">Grain Along Length</mat-radio-button>
-                <mat-radio-button value="withWidth">Grain Along Width</mat-radio-button>
-            </mat-radio-group>
+
              <div [ngSwitch]="tile['controls'].grain.value">
             <span>
                 <svg width="10rem" height="10em" >
