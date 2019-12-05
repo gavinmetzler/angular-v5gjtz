@@ -16,6 +16,7 @@ export class QuoteFormComponent implements OnInit {
     // Form state
   loading = false;
   success = false;
+  profilechosen = false;
 
   events = 'poi';
 
@@ -23,8 +24,14 @@ export class QuoteFormComponent implements OnInit {
     this.events = 'gesuntheight';
   }
 
-  thingyChanged(type: string, event: string) {
-    this.events = event;
+  serviceChanged(type: string) {
+    this.events = type;
+    //TODO: Check if user has previously added a bunch of cuts, and now just changed service type to Profile, in which case all cuts except first need to be deleted.
+    // or maybe we can just hide everything except the first one in the html - that might be better.
+  }
+
+  profileChosen(type: boolean) {
+    this.profilechosen = type;
   }
 
   constructor(private fb: FormBuilder) { }
@@ -54,6 +61,9 @@ export class QuoteFormComponent implements OnInit {
       width: [],
       grain: ['noGrain'],
       thickness: [null,[Validators.required, Validators.max(40)]],
+      service: [],
+      profileType: [],
+      apronHeight: [],
       cuts: this.fb.array([])
     })
 
@@ -69,12 +79,14 @@ export class QuoteFormComponent implements OnInit {
   addCut(i) {
 
     const cut = this.fb.group({ 
-      cutType: [],
+      quantity: [],
       dim1: [],
       dim2: [],
-      profileType: [],
-      apronHeight: [],
-      // TODO: flesh out cut data
+      edge1: [],
+      edge2: [],
+      edge3: [],
+      edge4: [],
+      grain: []
     });
 
     (<FormArray>(<FormArray>this.myForm.controls['tiles']).at(i).get('cuts')).push(cut);

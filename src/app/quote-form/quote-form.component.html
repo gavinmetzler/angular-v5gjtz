@@ -1,5 +1,5 @@
 <!---
-TODO
+TODO v0.91
 picture with auto aspect ratio adjustment on Tile input selection
 flip grain 'button' above image, size input on left and bottom.
 3d & plan view of cut/profiled tile. 
@@ -83,11 +83,117 @@ flip grain 'button' above image, size input on left and bottom.
               </mat-form-field></div>
           </div>
        </div>
-   
+                      <h2>Work required</h2>
+                  <mat-form-field class="dp">
+                   <mat-select placeholder="Choose service" formControlName="service" (selectionChange)="serviceChanged(tile['controls'].service.value)">
+                    <mat-option value="c2s">Cut to size</mat-option>
+                    <mat-option value="profile">Profile</mat-option>
+                    <mat-option value="cutandprofile">Cut to size and Profile</mat-option>
+                    <<!--mat-option value="groove">Grooves</mat-option>-->
+                  </mat-select>
+                </mat-form-field> 
               <!--<div *ngIf="tile.errors?.widthGreaterThanLength && (myForm.touched || myForm.dirty)" class="cross-validation-error-message alert alert-danger">
                 Length must be equal to or greater than width.
              </div>-->
              <br>
+                   <div *ngIf="(tile['controls'].service.value=='profile')||(tile['controls'].service.value=='cutandprofile')">
+                     <h2>Choose a profile</h2>
+                      <div *ngIf="profilechosen"><button mat-raised-button type="button" (click)="profileChosen(false);">choose a different profile</button></div>
+                    <mat-grid-list cols="4" rowHeight="120pt">
+                      <mat-radio-group formControlName="profileType" aria-label="Select a profile" class="xs" (change)="profileChosen(true);">
+ 
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='pencilround'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M336.8317,144.3564 L1.782178,144.3564 L1.782178,215.6436 L358.2178,215.6436 L358.2178,165.7426 C358.3504,160.7541 356.0865,154.7529 351.954,150.6203 C347.8214,146.4877 341.8201,144.2238 336.8317,144.3564 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" /></svg><br>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="pencilround">Pencil Round</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='bevelled'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.782178,215.6436 L358.2178,215.6436 L358.2178,158.6139 L343.9604,144.3564 L1.782178,144.3564 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                          </svg><br>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="bevelled">Bevelled</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='halfbullnose'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M358.2178,208.5148 L358.2178,215.6436 L1.782178,215.6436 L1.782178,144.3564 L294.0594,144.3564 C309.0248,143.9586 327.0285,150.7503 339.4263,163.148 C351.824,175.5457 358.6157,193.5495 358.2178,208.5148 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                          </svg>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="halfbullnose">Half Bullnose</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='fullbullnose'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M322.5742,215.6436 C330.8884,215.8646 340.8904,212.0914 347.7781,205.2038 C354.6657,198.3162 358.4388,188.3141 358.2178,180 C358.4388,171.6859 354.6657,161.6838 347.7781,154.7962 C340.8904,147.9086 330.8884,144.1354 322.5742,144.3564 L1.782178,144.3564 L1.782178,215.6436 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                          </svg>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="fullbullnose">Full Bullnose</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='laminatedpencilround'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M358.2178,229.901 L358.2178,180 L215.6436,180 L215.6436,251.2871 L336.8317,251.2871 C341.8201,251.4197 347.8214,249.1559 351.954,245.0233 C356.0865,240.8907 358.3504,234.8895 358.2178,229.901 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                            <path d="M336.8317,108.7129 L1.782178,108.7129 L1.782178,180 L358.2178,180 L358.2178,130.099 C358.3504,125.1105 356.0865,119.1093 351.954,114.9767 C347.8214,110.8442 341.8201,108.5803 336.8317,108.7129 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                          </svg>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="laminatedpencilround">Laminated Pencil Round</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='laminatedbevelled'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.782178,180 L358.2178,180 L358.2178,122.9703 L343.9604,108.7129 L1.782178,108.7129 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                            <path d="M215.6436,251.2872 L358.2178,251.2872 L358.2178,180 L215.6436,180 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                          </svg>
+                          <mat-grid-tile-footer><mat-radio-button class="xs" value="laminatedbevelled">Laminated Bevelled</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='laminatedhalfbullnose'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M358.2178,172.8713 L358.2178,180 L1.782178,180 L1.782178,108.7129 L294.0594,108.7129 C309.0248,108.315 327.0285,115.1067 339.4263,127.5044 C351.824,139.9022 358.6157,157.9059 358.2178,172.8713 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                            <path d="M215.6436,251.2872 L358.2178,251.2872 L358.2178,180 L215.6436,180 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                          </svg>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="laminatedhalfbullnose">Laminated Half Bullnose</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='laminatedfullbullnose'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M358.2178,180 L215.6436,180 L215.6436,251.2871 L286.9307,251.2871 C303.5589,251.7292 323.563,244.1829 337.3383,230.4076 C351.1136,216.6324 358.6599,196.6282 358.2178,180 C358.6599,163.3718 351.1136,143.3676 337.3383,129.5924 C323.563,115.8171 303.5589,108.2708 286.9307,108.7129 L1.782178,108.7129 L1.782178,180 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                          </svg>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="laminatedfullbullnose">Laminated Full Bullnose</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='apronpencilround'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M336.8317,73.06931 L1.782178,73.06931 L1.782178,144.3564 L358.2178,144.3564 L358.2178,94.45544 C358.3504,89.46699 356.0865,83.46574 351.954,79.33316 C347.8214,75.20058 341.8201,72.93669 336.8317,73.06931 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                            <path d="M358.2178,286.9307 L358.2178,144.3565 L286.9307,144.3565 L286.9307,286.9307 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                          </svg>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="apronpencilround">Apron Pencil Round</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='apronbevelled'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.782178,144.3564 L358.2178,144.3564 L358.2178,87.32674 L343.9604,73.06931 L1.782178,73.06931 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                            <path d="M358.2178,286.9307 L358.2178,144.3565 L286.9307,144.3565 L286.9307,286.9307 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                          </svg>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="apronbevelled">Apron Bevelled</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='apronhalfbullnose'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M358.2178,137.2277 L358.2178,144.3564 L1.782178,144.3564 L1.782178,73.06931 L294.0594,73.06931 C309.0248,72.67146 327.0285,79.46315 339.4263,91.86087 C351.824,104.2586 358.6157,122.2623 358.2178,137.2277 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                            <path d="M358.2178,286.9307 L358.2178,144.3565 L286.9307,144.3565 L286.9307,286.9307 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                          </svg>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="apronhalfbullnose">Apron Half Bullnose</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                        <div *ngIf="!profilechosen || tile['controls'].profileType.value=='apronmitred'"><mat-grid-tile>
+                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M328.1852,96.10715 L339.1022,115.0161 L317.2681,115.0161 z" stroke="Black" stroke-width="0" fill="#FF0000" fill-opacity="1.0" />
+                            <path d="M328.1852,263.8929 L317.2681,244.9839 L339.1022,244.9839 z" stroke="Black" stroke-width="0" fill="#FF0000" fill-opacity="1.0" />
+                            <path d="M281.425,146.4429 L281.425,152.0357 L1.782178,152.0357 L1.782178,96.10715 L231.0893,96.10715 C242.8304,95.79501 256.9554,101.1235 266.682,110.8501 C276.4087,120.5768 281.7372,134.7017 281.425,146.4429 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                            <text x="318.07962031608" y="192.473278381272" font-family="Arial" font-size="38.90684">a</text>
+                            <path d="M281.425,263.8929 L281.425,152.0357 L225.4965,152.0357 L225.4965,263.8929 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                            <path d="M328.1852,159.17 L328.1852,96.10717" stroke="#FF0000" stroke-width="5.76" fill-opacity="0" />
+                            <path d="M293.5328,96.10717 L358.2178,96.10717" stroke="#FF0000" stroke-width="5.76" fill-opacity="0" />
+                            <path d="M304.4305,263.8929 L358.2178,263.8929" stroke="#FF0000" stroke-width="5.76" fill-opacity="0" />
+                            <path d="M328.1852,200.8301 L328.1852,263.8929" stroke="#FF0000" stroke-width="5.76" fill-opacity="0" />
+                          </svg>
+                          <mat-grid-tile-footer><mat-radio-button class="lp" value="apronmitred">Apron Mitred</mat-radio-button></mat-grid-tile-footer>
+                        </mat-grid-tile></div>
+                      </mat-radio-group>
+                    </mat-grid-list>
+                <!--    <mat-form-field class="xs" *ngIf="tile['controls'].profileType.value==='apronmitred') || (tile['controls'].profileType.value==='apronhalfbullnose') || (tile['controls'].profileType.value==='apronbevelled') || (tile['controls'].profileType.value==='apronpencilround')">
+                      <input matInput type="number" placeholder="Apron Height(a)(mm)" formControlName="apronHeight">
+                    </mat-form-field>-->
+                  </div>
+
              <!--
 
              <div [ngSwitch]="tile['controls'].grain.value">
@@ -102,128 +208,38 @@ flip grain 'button' above image, size input on left and bottom.
 
        <br>    
             <div formArrayName="cuts">
-               <h2>Work required</h2>
+
               <div *ngFor="let cut of tile['controls'].cuts['controls']; let j=index" [formGroupName]="j">
-               <mat-form-field class="dp">
-                   <mat-select placeholder="Cut Type" formControlName="cutType" (selectionChange)="thingyChanged('inshput', material)">
-                    <mat-option value="c2s">Cut to size</mat-option>
-                    <mat-option value="profile">Profile</mat-option>
-                    <mat-option value="cutandprofile">Cut to size and Profile</mat-option>
-                    <mat-option value="groove">Grooves</mat-option>
-                  </mat-select>
-                </mat-form-field> 
+
            <!--<mat-radio-group formControlName="cutType" aria-label="Select an option" class="xs">
                 <mat-radio-button class="xs" value="c2s">Cut to Size</mat-radio-button>
                 <mat-radio-button class="xs" value="profile">Profile</mat-radio-button>
                 <mat-radio-button value="groove">Grooves</mat-radio-button>
             </mat-radio-group>-->
 
-                <button mat-raised-button type="button" color="warn" (click)="deleteCut(i)">Remove Cut</button>
 
-                <div [ngSwitch]="cut['controls'].cutType.value">
-                  <div *ngSwitchCase="'c2s'">
+                  <span *ngIf="tile['controls'].service.value!='profile'" >
+                    <mat-form-field class="xss">
+                      <input matInput type="number" placeholder="Quantity" formControlName="quantity">
+                    </mat-form-field>
                     <mat-form-field class="xs">
                       <input matInput type="number" placeholder="Width (mm)" formControlName="dim1">
                     </mat-form-field>
                     <mat-form-field class="xs">
                       <input matInput type="number" placeholder="Length (mm)" formControlName="dim2">
                     </mat-form-field>
-                  </div>
+                  <span *ngIf="tile['controls'].grain.value!='noGrain'">  Grain: <mat-radio-group formControlName="grain" class="xss">
+                <mat-radio-button  value="Width">Width</mat-radio-button>
+                <mat-radio-button class="xss" value="Length">Length</mat-radio-button>
+            </mat-radio-group></span>
+                </span>
+profile <mat-checkbox formControlName="edge1"></mat-checkbox>
+<mat-checkbox formControlName="edge2"></mat-checkbox>
+<mat-checkbox formControlName="edge3"></mat-checkbox>
+<mat-checkbox formControlName="edge4"></mat-checkbox>
+              <div style="width: 50px; height: 50px; border-style:solid;"></div>
 
-                  <div *ngSwitchCase="'profile'">
-                    <mat-grid-list cols="4" rowHeight="120pt">
-                      <mat-radio-group formControlName="profileType" aria-label="Select a profile" class="xs">
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M336.8317,144.3564 L1.782178,144.3564 L1.782178,215.6436 L358.2178,215.6436 L358.2178,165.7426 C358.3504,160.7541 356.0865,154.7529 351.954,150.6203 C347.8214,146.4877 341.8201,144.2238 336.8317,144.3564 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" /></svg><br>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="pencilround">Pencil Round</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.782178,215.6436 L358.2178,215.6436 L358.2178,158.6139 L343.9604,144.3564 L1.782178,144.3564 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                          </svg><br>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="bevelled">Bevelled</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M358.2178,208.5148 L358.2178,215.6436 L1.782178,215.6436 L1.782178,144.3564 L294.0594,144.3564 C309.0248,143.9586 327.0285,150.7503 339.4263,163.148 C351.824,175.5457 358.6157,193.5495 358.2178,208.5148 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                          </svg>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="halfbullnose">Half Bullnose</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M322.5742,215.6436 C330.8884,215.8646 340.8904,212.0914 347.7781,205.2038 C354.6657,198.3162 358.4388,188.3141 358.2178,180 C358.4388,171.6859 354.6657,161.6838 347.7781,154.7962 C340.8904,147.9086 330.8884,144.1354 322.5742,144.3564 L1.782178,144.3564 L1.782178,215.6436 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                          </svg>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="fullbullnose">Full Bullnose</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M358.2178,229.901 L358.2178,180 L215.6436,180 L215.6436,251.2871 L336.8317,251.2871 C341.8201,251.4197 347.8214,249.1559 351.954,245.0233 C356.0865,240.8907 358.3504,234.8895 358.2178,229.901 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                            <path d="M336.8317,108.7129 L1.782178,108.7129 L1.782178,180 L358.2178,180 L358.2178,130.099 C358.3504,125.1105 356.0865,119.1093 351.954,114.9767 C347.8214,110.8442 341.8201,108.5803 336.8317,108.7129 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                          </svg>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="laminatedpencilround">Laminated Pencil Round</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.782178,180 L358.2178,180 L358.2178,122.9703 L343.9604,108.7129 L1.782178,108.7129 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                            <path d="M215.6436,251.2872 L358.2178,251.2872 L358.2178,180 L215.6436,180 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                          </svg>
-                          <mat-grid-tile-footer><mat-radio-button class="xs" value="laminatedbevelled">Laminated Bevelled</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M358.2178,172.8713 L358.2178,180 L1.782178,180 L1.782178,108.7129 L294.0594,108.7129 C309.0248,108.315 327.0285,115.1067 339.4263,127.5044 C351.824,139.9022 358.6157,157.9059 358.2178,172.8713 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                            <path d="M215.6436,251.2872 L358.2178,251.2872 L358.2178,180 L215.6436,180 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                          </svg>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="laminatedhalfbullnose">Laminated Half Bullnose</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M358.2178,180 L215.6436,180 L215.6436,251.2871 L286.9307,251.2871 C303.5589,251.7292 323.563,244.1829 337.3383,230.4076 C351.1136,216.6324 358.6599,196.6282 358.2178,180 C358.6599,163.3718 351.1136,143.3676 337.3383,129.5924 C323.563,115.8171 303.5589,108.2708 286.9307,108.7129 L1.782178,108.7129 L1.782178,180 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                          </svg>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="laminatedfullbullnose">Laminated Full Bullnose</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M336.8317,73.06931 L1.782178,73.06931 L1.782178,144.3564 L358.2178,144.3564 L358.2178,94.45544 C358.3504,89.46699 356.0865,83.46574 351.954,79.33316 C347.8214,75.20058 341.8201,72.93669 336.8317,73.06931 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                            <path d="M358.2178,286.9307 L358.2178,144.3565 L286.9307,144.3565 L286.9307,286.9307 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                          </svg>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="apronpencilround">Apron Pencil Round</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.782178,144.3564 L358.2178,144.3564 L358.2178,87.32674 L343.9604,73.06931 L1.782178,73.06931 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                            <path d="M358.2178,286.9307 L358.2178,144.3565 L286.9307,144.3565 L286.9307,286.9307 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                          </svg>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="apronbevelled">Apron Bevelled</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M358.2178,137.2277 L358.2178,144.3564 L1.782178,144.3564 L1.782178,73.06931 L294.0594,73.06931 C309.0248,72.67146 327.0285,79.46315 339.4263,91.86087 C351.824,104.2586 358.6157,122.2623 358.2178,137.2277 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                            <path d="M358.2178,286.9307 L358.2178,144.3565 L286.9307,144.3565 L286.9307,286.9307 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                          </svg>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="apronhalfbullnose">Apron Half Bullnose</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                        <mat-grid-tile>
-                          <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M328.1852,96.10715 L339.1022,115.0161 L317.2681,115.0161 z" stroke="Black" stroke-width="0" fill="#FF0000" fill-opacity="1.0" />
-                            <path d="M328.1852,263.8929 L317.2681,244.9839 L339.1022,244.9839 z" stroke="Black" stroke-width="0" fill="#FF0000" fill-opacity="1.0" />
-                            <path d="M281.425,146.4429 L281.425,152.0357 L1.782178,152.0357 L1.782178,96.10715 L231.0893,96.10715 C242.8304,95.79501 256.9554,101.1235 266.682,110.8501 C276.4087,120.5768 281.7372,134.7017 281.425,146.4429 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                            <text x="318.07962031608" y="192.473278381272" font-family="Arial" font-size="38.90684">a</text>
-                            <path d="M281.425,263.8929 L281.425,152.0357 L225.4965,152.0357 L225.4965,263.8929 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-                            <path d="M328.1852,159.17 L328.1852,96.10717" stroke="#FF0000" stroke-width="5.76" fill-opacity="0" />
-                            <path d="M293.5328,96.10717 L358.2178,96.10717" stroke="#FF0000" stroke-width="5.76" fill-opacity="0" />
-                            <path d="M304.4305,263.8929 L358.2178,263.8929" stroke="#FF0000" stroke-width="5.76" fill-opacity="0" />
-                            <path d="M328.1852,200.8301 L328.1852,263.8929" stroke="#FF0000" stroke-width="5.76" fill-opacity="0" />
-                          </svg>
-                          <mat-grid-tile-footer><mat-radio-button class="lp" value="apronmitred">Apron Mitred</mat-radio-button></mat-grid-tile-footer>
-                        </mat-grid-tile>
-                      </mat-radio-group>
-                    </mat-grid-list>
-                    <mat-form-field class="xs" *ngIf="(cut['controls'].profileType.value==='apronmitred') || (cut['controls'].profileType.value==='apronhalfbullnose') || (cut['controls'].profileType.value==='apronbevelled') || (cut['controls'].profileType.value==='apronpencilround')">
-                      <input matInput type="number" placeholder="Apron Height(a)(mm)" formControlName="apronHeight">
-                    </mat-form-field>
-                  </div>
+<button mat-icon-button *ngIf="(tile['controls'].service.value!='profile') && ([j]!=0)" type="button" color="warn" (click)="deleteCut(i)">(remove)</button>
                  <!---<span>
                     <svg width="10rem" height="10em" >
                       <rect width="100%" height="100%" fill="none" stroke="black" stroke-width="4" />
@@ -237,13 +253,13 @@ flip grain 'button' above image, size input on left and bottom.
                 </div>
 
               </div>
-            <button mat-raised-button type="button" color="primary" (click)="addCut(i)">Add Cut</button>
+            <button *ngIf="tile['controls'].service.value!='profile'" mat-raised-button type="button" color="primary" (click)="addCut(i)">Add Cut</button>
             </div>
 
             <br><br><br>
         </div>
 
-    </div>
+   
 
     <button mat-raised-button type="button" color="primary" (click)="addTile()">Add Tile</button>
   <hr>
