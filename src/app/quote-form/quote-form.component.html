@@ -65,21 +65,22 @@ flip grain 'button' above image, size input on left and bottom.
 
         <div class="tilesizer" style="height:14em; width:40em">
           <div style="height:100%; width: 30%; text-align: center; border-style:none; float:left;"><div style="padding-top:30%; float:right "><mat-form-field class="xss">
-                <input matInput placeholder="Size A (mm)" formControlName="length">
+                <input matInput type="number" placeholder="Size A (mm)" formControlName="length">
             </mat-form-field></div></div>
           <div style="height:100%; width: 60%; text-align: center; border-style:none; float:left">
-             <div style="height: 180px; width: 180px; border-style:solid; text-align: left;">
-               <div style="margin-left:50px;">Grain
+             <div [style.width.px]="tile['controls'].dispwidth.value" [style.height.px]="tile['controls'].dispheight.value" style="border-style:solid; text-align: left;"> 
+             <!-- [ngStyle]="{'max-width.px': widthExp}" -->
+               <!--<div style="margin-left:50px;">Grain
               <mat-radio-group formControlName="grain" aria-label="Select an option" class="xs">
                   <mat-radio-button class="xs" value="noGrain">none</mat-radio-button>
                   <mat-radio-button class="xs" value="withLength">||</mat-radio-button>
                   <mat-radio-button class="xs" value="withWidth">=</mat-radio-button>
               </mat-radio-group>
-              </div>
+              </div>-->
              </div>
              <div style="width: 100%; text-align: left;"> 
               <mat-form-field class="dp xss" style="margin-left:20px;">
-                <input matInput placeholder="Size B (mm)" formControlName="width">
+                <input matInput type="number" placeholder="Size B (mm)" formControlName="width" (change)="tileSizeChanged(i)">
               </mat-form-field></div>
           </div>
        </div>
@@ -218,10 +219,11 @@ flip grain 'button' above image, size input on left and bottom.
             </mat-radio-group>-->
 
 
-                  <span *ngIf="tile['controls'].service.value!='profile'" >
+ 
                     <mat-form-field class="xss">
                       <input matInput type="number" placeholder="Quantity" formControlName="quantity">
                     </mat-form-field>
+                  <span *ngIf="tile['controls'].service.value!='profile'" >
                     <mat-form-field class="xs">
                       <input matInput type="number" placeholder="Width (mm)" formControlName="dim1">
                     </mat-form-field>
@@ -239,7 +241,7 @@ profile <mat-checkbox formControlName="edge1"></mat-checkbox>
 <mat-checkbox formControlName="edge4"></mat-checkbox>
               <div style="width: 50px; height: 50px; border-style:solid;"></div>
 
-<button mat-icon-button *ngIf="(tile['controls'].service.value!='profile') && ([j]!=0)" type="button" color="warn" (click)="deleteCut(i)">(remove)</button>
+<button mat-icon-button *ngIf="([j]!=0)" type="button" color="warn" (click)="deleteCut(i)">(remove)</button>
                  <!---<span>
                     <svg width="10rem" height="10em" >
                       <rect width="100%" height="100%" fill="none" stroke="black" stroke-width="4" />
@@ -253,7 +255,10 @@ profile <mat-checkbox formControlName="edge1"></mat-checkbox>
                 </div>
 
               </div>
-            <button *ngIf="tile['controls'].service.value!='profile'" mat-raised-button type="button" color="primary" (click)="addCut(i)">Add Cut</button>
+            <button mat-raised-button type="button" color="primary" (click)="addCut(i)">Add 
+              <span *ngIf="(tile['controls'].service.value!='profile')">Cut</span>
+              <span *ngIf="(tile['controls'].service.value=='profile')">Profile</span>
+            </button>
             </div>
 
             <br><br><br>
@@ -274,6 +279,6 @@ profile <mat-checkbox formControlName="edge1"></mat-checkbox>
 
 <br><hr><br><br>
 This form is still being developed, please ensure you contact Customed Tiles by phone or email in addition to submitting the form.<br>
-You can ignore the below. It is for debugging only. {{ events }}x
+You can ignore the below. It is for debugging only. {{ events }}x widdy="{{bigwiddy}}"
   Value: {{ myForm.value | json }}
   <br>

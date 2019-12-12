@@ -19,6 +19,7 @@ export class QuoteFormComponent implements OnInit {
   profilechosen = false;
 
   events = 'poi';
+  bigwiddy = 0;
 
   thongyChanged(type: string, event: MatDatepickerInputEvent<Date>) {
     this.events = 'gesuntheight';
@@ -28,10 +29,23 @@ export class QuoteFormComponent implements OnInit {
     this.events = type;
     //TODO: Check if user has previously added a bunch of cuts, and now just changed service type to Profile, in which case all cuts except first need to be deleted.
     // or maybe we can just hide everything except the first one in the html - that might be better.
+    // actually, no - user still might want to profile different edges of different tiles, especially corners which will have 2 edges profiled.
+
+    //This event isn't really needed anymore - keep as a template for now.
   }
 
   profileChosen(type: boolean) {
     this.profilechosen = type;
+  }
+
+  tileSizeChanged(i)
+  {
+    if (<this.myForm.controls['tiles'].dirt)
+    {
+      let widdy = (<FormArray>this.myForm.controls['tiles']).at(i).get("width").value;
+      this.bigwiddy = widdy;
+      (<FormArray>this.myForm.controls['tiles']).at(i).get("dispheight").setValue(widdy); 
+    }
   }
 
   constructor(private fb: FormBuilder) { }
@@ -59,6 +73,8 @@ export class QuoteFormComponent implements OnInit {
       material: [],
       length: [],
       width: [],
+      dispwidth: [180],
+      dispheight: [180],
       grain: ['noGrain'],
       thickness: [null,[Validators.required, Validators.max(40)]],
       service: [],
@@ -118,7 +134,7 @@ export class QuoteFormComponent implements OnInit {
     return this.myForm.get('email');
   }
 }
-
+//This was copy-pasted from somewhere, just keeping it as a template
 export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} | null => {
     const forbidden = nameRe.test(control.value);
