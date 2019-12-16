@@ -19,7 +19,6 @@ export class QuoteFormComponent implements OnInit {
   profilechosen = false;
 
   events = 'poi';
-  bigwiddy = 0;
 
   thongyChanged(type: string, event: MatDatepickerInputEvent<Date>) {
     this.events = 'gesuntheight';
@@ -38,13 +37,23 @@ export class QuoteFormComponent implements OnInit {
     this.profilechosen = type;
   }
 
-  tileSizeChanged(i)
+  tileSizeChanged(i, which: string)
   {
-    if (<this.myForm.controls['tiles'].dirt)
+    //if ((<FormArray>this.myForm.controls['tiles']).at(i).get("width").touched) 
+    if ((which=="width" && (<FormArray>this.myForm.controls['tiles']).at(i).get("length").touched) || (which=="length" && (<FormArray>this.myForm.controls['tiles']).at(i).get("width").touched) )
     {
-      let widdy = (<FormArray>this.myForm.controls['tiles']).at(i).get("width").value;
-      this.bigwiddy = widdy;
-      (<FormArray>this.myForm.controls['tiles']).at(i).get("dispheight").setValue(widdy); 
+      let widdy = 200;
+      let lenny = 200;
+      widdy = (<FormArray>this.myForm.controls['tiles']).at(i).get("width").value;
+      lenny = (<FormArray>this.myForm.controls['tiles']).at(i).get("length").value;
+
+      let dispheight = 180;
+      let dispwidth = 180;
+      if (lenny>widdy) { dispwidth = 130; }
+      if (lenny<widdy) { dispheight = 130;}
+
+      (<FormArray>this.myForm.controls['tiles']).at(i).get("dispheight").setValue(dispheight); 
+      (<FormArray>this.myForm.controls['tiles']).at(i).get("dispwidth").setValue(dispwidth); 
     }
   }
 
@@ -98,6 +107,8 @@ export class QuoteFormComponent implements OnInit {
       quantity: [],
       dim1: [],
       dim2: [],
+      dispwidth: [20],
+      dispheight: [20],
       edge1: [],
       edge2: [],
       edge3: [],
