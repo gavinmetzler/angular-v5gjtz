@@ -348,7 +348,7 @@ flip grain 'button' above image, size input on left and bottom.
 						<br>
 						<div formArrayName="cuts">
 
-							<div *ngFor="let cut of tile['controls'].cuts['controls']; let j=index" [formGroupName]="j" style="clear:right;">
+							<div *ngFor="let cut of tile['controls'].cuts['controls']; let j=index" [formGroupName]="j" style="clear:right; height:100px;">
 
 								<!--<mat-radio-group formControlName="cutType" aria-label="Select an option" class="xs">
                 <mat-radio-button class="xs" value="c2s">Cut to Size</mat-radio-button>
@@ -363,10 +363,10 @@ flip grain 'button' above image, size input on left and bottom.
                     </mat-form-field>
 										<span *ngIf="tile['controls'].service.value!='profile'" >
                     <mat-form-field class="xs">
-                      <input matInput type="number" placeholder="Width (mm)" formControlName="dim1">
+                      <input matInput type="number" placeholder="Cut size (A)" formControlName="dim1" (change)="tileCutChanged(i, j, 'dim1')">
                     </mat-form-field>
                     <mat-form-field class="xs">
-                      <input matInput type="number" placeholder="Length (mm)" formControlName="dim2">
+                      <input matInput type="number" placeholder="Cut size (B)" formControlName="dim2" (change)="tileCutChanged(i, j, 'dim2')">
                     </mat-form-field>
                   <span *ngIf="tile['controls'].grain.value!='noGrain'">  Grain: <mat-radio-group formControlName="grain" class="xss">
                 <mat-radio-button  value="Width">Width</mat-radio-button>
@@ -375,7 +375,7 @@ flip grain 'button' above image, size input on left and bottom.
 										</span>
 										profile
 								</div>
-								<div style="width: 100px; height: 70px; border-style:none; float:left">
+								<div [style.width.px]="cut['controls'].dispwidth.value" style="height: 70px; border-style:none; float:left">
 									<div style="width: 100%; height: 25%; text-align: center; border-style:none;">
 										<mat-checkbox formControlName="edge1"></mat-checkbox>
 									</div>

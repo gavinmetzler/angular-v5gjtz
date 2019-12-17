@@ -39,8 +39,7 @@ export class QuoteFormComponent implements OnInit {
 
   tileSizeChanged(i, which: string)
   {
-    //if ((<FormArray>this.myForm.controls['tiles']).at(i).get("width").touched) 
-    if ((which=="width" && (<FormArray>this.myForm.controls['tiles']).at(i).get("length").touched) || (which=="length" && (<FormArray>this.myForm.controls['tiles']).at(i).get("width").touched) )
+     if ((which=="width" && (<FormArray>this.myForm.controls['tiles']).at(i).get("length").touched) || (which=="length" && (<FormArray>this.myForm.controls['tiles']).at(i).get("width").touched) )
     {
       let widdy = 200;
       let lenny = 200;
@@ -54,6 +53,25 @@ export class QuoteFormComponent implements OnInit {
 
       (<FormArray>this.myForm.controls['tiles']).at(i).get("dispheight").setValue(dispheight); 
       (<FormArray>this.myForm.controls['tiles']).at(i).get("dispwidth").setValue(dispwidth); 
+    }
+  }
+
+  tileCutChanged(i, j, which: string)
+  {
+    if ((which=="dim1" && (<FormArray>(<FormArray>this.myForm.controls['tiles']).at(i).get('cuts')).at(j).get("dim2").touched) || (which=="dim2" && (<FormArray>(<FormArray>this.myForm.controls['tiles']).at(i).get('cuts')).at(j).get("dim1").touched) )
+    {
+      let widdy = 100;
+      let lenny = 100;
+      widdy = (<FormArray>(<FormArray>this.myForm.controls['tiles']).at(i).get('cuts')).at(j).get("dim1").value;
+      lenny = (<FormArray>(<FormArray>this.myForm.controls['tiles']).at(i).get('cuts')).at(j).get("dim2").value;
+
+      let dispheight = 70;
+      let dispwidth = 100;
+      if (lenny>widdy) { dispwidth = 150; }
+      if (lenny<widdy) { dispwidth = 70;}
+
+      (<FormArray>(<FormArray>this.myForm.controls['tiles']).at(i).get('cuts')).at(j).get("dispheight").setValue(dispheight); 
+      (<FormArray>(<FormArray>this.myForm.controls['tiles']).at(i).get('cuts')).at(j).get("dispwidth").setValue(dispwidth); 
     }
   }
 
@@ -107,8 +125,8 @@ export class QuoteFormComponent implements OnInit {
       quantity: [],
       dim1: [],
       dim2: [],
-      dispwidth: [20],
-      dispheight: [20],
+      dispwidth: [100],
+      dispheight: [70],
       edge1: [],
       edge2: [],
       edge3: [],
