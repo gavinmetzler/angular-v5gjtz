@@ -48,11 +48,13 @@ export class QuoteFormComponent implements OnInit {
 
       let dispheight = 180;
       let dispwidth = 180;
-      if (lenny>widdy) { dispwidth = 130; }
-      if (lenny<widdy) { dispheight = 130;}
+      let miniwidth = 100;
+      if (lenny>widdy) { dispwidth = 130; miniwidth = 70; }
+      if (lenny<widdy) { dispheight = 130; miniwidth = 150; }
 
       (<FormArray>this.myForm.controls['tiles']).at(i).get("dispheight").setValue(dispheight); 
       (<FormArray>this.myForm.controls['tiles']).at(i).get("dispwidth").setValue(dispwidth); 
+      (<FormArray>this.myForm.controls['tiles']).at(i).get("miniwidth").setValue(miniwidth); 
     }
   }
 
@@ -73,6 +75,7 @@ export class QuoteFormComponent implements OnInit {
       (<FormArray>(<FormArray>this.myForm.controls['tiles']).at(i).get('cuts')).at(j).get("dispheight").setValue(dispheight); 
       (<FormArray>(<FormArray>this.myForm.controls['tiles']).at(i).get('cuts')).at(j).get("dispwidth").setValue(dispwidth); 
     }
+    //if service is profile only, get the aspect ratio from the parent tile, and adjust the form when the quantity 
   }
 
   constructor(private fb: FormBuilder) { }
@@ -102,6 +105,7 @@ export class QuoteFormComponent implements OnInit {
       width: [],
       dispwidth: [180],
       dispheight: [180],
+      miniwidth: [100],
       grain: ['noGrain'],
       thickness: [null,[Validators.required, Validators.max(40)]],
       service: [],
@@ -133,7 +137,7 @@ export class QuoteFormComponent implements OnInit {
       edge4: [],
       grain: []
     });
-
+//
     (<FormArray>(<FormArray>this.myForm.controls['tiles']).at(i).get('cuts')).push(cut);
   }
 

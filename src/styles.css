@@ -10,7 +10,7 @@
 .tilesizer {
     padding: 0;
     max-width: 50em;
-    margin: auto;
+    margin-left: 1em;
 }
 
 body {
