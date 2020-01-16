@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, FormArray, Validators, FormControl, ValidatorFn, AbstractControl, ValidationErrors  } from '@angular/forms';
 import {MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatSelectChange } from '@angular/material/select';
+import  {PostService} from './services/post.service';
 
 @Component({
   selector: 'app-quote-form',
@@ -78,7 +79,7 @@ export class QuoteFormComponent implements OnInit {
     //if service is profile only, get the aspect ratio from the parent tile, and adjust the form when the quantity 
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private service:PostService) { }
 
   ngOnInit() {
     this.myForm = this.fb.group ({
@@ -152,6 +153,13 @@ export class QuoteFormComponent implements OnInit {
 
     try {
       //TODO: Send form data 
+      let post = {'cf-name' : 'testname',
+                  'cf-email': 'gavin@achado.com',
+                  'cf-subject': 'a test subject 1',
+                  'cf-message': 'sukmeeonthewang' };
+      this.service.create (post)
+        .subscribe( response => console.log ('Success!', response),
+                    error => console.error ('Error! Gaverror', error));
       this.success = true;
     } catch(err) {
       console.error(err)

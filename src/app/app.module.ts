@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -19,10 +20,12 @@ import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
+import  {PostService} from './quote-form/services/post.service';
 
 @NgModule({
-  imports:      [ BrowserModule, ReactiveFormsModule, MatInputModule, MatSelectModule, MatButtonModule, MatCheckboxModule, MatChipsModule, FontAwesomeModule, BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatGridListModule ],
+  imports:      [ BrowserModule, ReactiveFormsModule, HttpClientModule, MatInputModule, MatSelectModule, MatButtonModule, MatCheckboxModule, MatChipsModule, FontAwesomeModule, BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatGridListModule ],
   declarations: [ AppComponent, QuoteFormComponent ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  providers: [PostService]
 })
 export class AppModule { }
