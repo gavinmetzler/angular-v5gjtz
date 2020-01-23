@@ -153,7 +153,7 @@ export class QuoteFormComponent implements OnInit {
 
     try {
       //TODO: Send form data 
-      let post = JSON.stringify(formValue);
+      let post = { 'submission': JSON.stringify(formValue) };
       this.service.create (post)
         .subscribe( response => console.log ('Success!', response),
                     error => console.error ('Error! Gaverror', error));
