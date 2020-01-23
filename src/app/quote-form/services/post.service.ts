@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class PostService {
 
-  private url = 'https://www.achado.com/?page_id=147';
+  private url = 'https://customedtiles.com.au/process-order';
 
   constructor(private httpClient: HttpClient) { }
 
