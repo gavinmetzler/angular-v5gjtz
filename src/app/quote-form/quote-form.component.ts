@@ -107,6 +107,7 @@ export class QuoteFormComponent implements OnInit {
     //  console.log(this.activatedRoute.snapshot.queryParamMap.get('param1')); // e.g. in URI ?param1=bla
     this.activatedRoute.queryParamMap.subscribe(queryParams => {
        this.queryparams = queryParams.get("param1");
+       console.log (this.queryparams);
     });
 
   }
