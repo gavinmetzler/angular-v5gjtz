@@ -19,6 +19,7 @@ export class QuoteFormComponent implements OnInit {
   loading = false;
   success = false;
   profilechosen = false;
+  queryparams = 'empty';
 
   events = 'poi';
 
@@ -103,7 +104,11 @@ export class QuoteFormComponent implements OnInit {
         
     //if(this.activatedRoute.snapshot.queryParamMap.get('param1'))
     console.log ('trying to find param1. ');
-      console.log(this.activatedRoute.snapshot.queryParamMap.get('param1')); // e.g. in URI ?param1=bla
+    //  console.log(this.activatedRoute.snapshot.queryParamMap.get('param1')); // e.g. in URI ?param1=bla
+    this.activatedRoute.queryParamMap.subscribe(queryParams => {
+       this.queryparams = queryParams.get("param1");
+    });
+
   }
 
   get tileForms() {
