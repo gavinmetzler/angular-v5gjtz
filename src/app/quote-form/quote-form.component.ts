@@ -81,10 +81,14 @@ export class QuoteFormComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder, private service:PostService, private activatedRoute: ActivatedRoute) { 
-   this.activatedRoute.queryParams.subscribe(params => {
-        let date = params['startdate'];
-        console.log(date); // Print the parameter to the console. 
-    });
+   /* this.activatedRoute.queryParamMap.subscribe(params => {
+        let paramitirs = params;
+        console.log('parameters found are:');
+        console.log(paramitirs); // Print the parameter to the console. 
+        console.log('end of parameters found');
+    }); */
+    if(this.activatedRoute.snapshot.queryParamMap.get('param1'))
+      console.log(this.activatedRoute.snapshot.queryParamMap.get('param1')); // e.g. in URI ?param1=bla
 }
 
   ngOnInit() {
