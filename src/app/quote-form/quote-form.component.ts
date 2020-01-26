@@ -101,12 +101,9 @@ export class QuoteFormComponent implements OnInit {
       tiles: this.fb.array([])
     },{ validators: identityRevealedValidator })
     this.addTile();
-        
-    //if(this.activatedRoute.snapshot.queryParamMap.get('param1'))
-    console.log ('trying to find param1. ');
-    //  console.log(this.activatedRoute.snapshot.queryParamMap.get('param1')); // e.g. in URI ?param1=bla
+       
     this.activatedRoute.queryParamMap.subscribe(queryParams => {
-       this.queryparams = queryParams.get("param1");
+       if (queryParams.get("orderdata")) this.queryparams = queryParams.get("orderdata");
        console.log (this.queryparams);
     });
 
