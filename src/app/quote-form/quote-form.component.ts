@@ -87,8 +87,7 @@ export class QuoteFormComponent implements OnInit {
         console.log(paramitirs); // Print the parameter to the console. 
         console.log('end of parameters found');
     }); */
-    if(this.activatedRoute.snapshot.queryParamMap.get('param1'))
-      console.log(this.activatedRoute.snapshot.queryParamMap.get('param1')); // e.g. in URI ?param1=bla
+
 }
 
   ngOnInit() {
@@ -101,6 +100,9 @@ export class QuoteFormComponent implements OnInit {
       tiles: this.fb.array([])
     },{ validators: identityRevealedValidator })
     this.addTile();
+        
+    if(this.activatedRoute.snapshot.queryParamMap.get('param1'))
+      console.log(this.activatedRoute.snapshot.queryParamMap.get('param1')); // e.g. in URI ?param1=bla
   }
 
   get tileForms() {

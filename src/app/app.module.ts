@@ -22,11 +22,12 @@ import { AppComponent } from './app.component';
 import { QuoteFormComponent } from './quote-form/quote-form.component';
 import { PostService } from './quote-form/services/post.service';
 import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   imports:      [ BrowserModule, ReactiveFormsModule, HttpClientModule, MatInputModule, MatSelectModule, MatButtonModule, MatCheckboxModule, MatChipsModule, FontAwesomeModule, BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatGridListModule, RouterModule.forRoot([]) ],
   declarations: [ AppComponent, QuoteFormComponent ],
   bootstrap:    [ AppComponent ],
-  providers: [PostService]
+  providers: [PostService, {provide: APP_BASE_HREF, useValue: '/from'}]
 })
 export class AppModule { }
