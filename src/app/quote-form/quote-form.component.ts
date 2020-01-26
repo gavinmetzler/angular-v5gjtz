@@ -2,7 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, FormArray, Validators, FormControl, ValidatorFn, AbstractControl, ValidationErrors  } from '@angular/forms';
 import {MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatSelectChange } from '@angular/material/select';
-import  {PostService} from './services/post.service';
+import { PostService } from './services/post.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quote-form',
@@ -79,7 +80,12 @@ export class QuoteFormComponent implements OnInit {
     //if service is profile only, get the aspect ratio from the parent tile, and adjust the form when the quantity 
   }
 
-  constructor(private fb: FormBuilder, private service:PostService) { }
+  constructor(private fb: FormBuilder, private service:PostService, private activatedRoute: ActivatedRoute) { 
+   this.activatedRoute.queryParams.subscribe(params => {
+        let date = params['startdate'];
+        console.log(date); // Print the parameter to the console. 
+    });
+}
 
   ngOnInit() {
     this.myForm = this.fb.group ({
