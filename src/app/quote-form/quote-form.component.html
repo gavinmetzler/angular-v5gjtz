@@ -9,7 +9,7 @@ flip grain 'button' above image, size input on left and bottom.
 <form [formGroup]="myForm" [hidden]="success" (ngSubmit)="submitHandler()">
 	<hr>
   Image test
-  <input type="file" accept="image/*" capture="camera" />
+  <!-- <input type="file" accept="image/*" capture="camera" /> -->
 	<h2>Contact information</h2>
 	<mat-form-field class="dp xs">
 		<input matInput placeholder="Name" formControlName="name">
@@ -463,10 +463,5 @@ flip grain 'button' above image, size input on left and bottom.
 	Thank You! We received your submission.
 </div>
 
-<br>
-<hr><br><br>
-This form is still being developed, please ensure you contact Customed Tiles by phone or email in addition to submitting the form.<br>
-You can ignore the below. It is for debugging only. 
-  Value: {{ myForm.value | json }}<br>
-  
+ 
 <br>
