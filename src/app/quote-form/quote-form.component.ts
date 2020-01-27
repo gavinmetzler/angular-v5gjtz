@@ -20,6 +20,7 @@ export class QuoteFormComponent implements OnInit {
   success = false;
   profilechosen = false;
   queryparams = 'empty';
+  counter1 = 0;
 
   events = 'poi';
 
@@ -105,6 +106,8 @@ export class QuoteFormComponent implements OnInit {
        
     this.activatedRoute.queryParamMap.subscribe(queryParams => {
        if (queryParams.get("orderdata")) this.queryparams = queryParams.get("orderdata");
+       this.counter1++;
+       console.log (this.counter1.toString());
        console.log (this.queryparams);
     });
 
