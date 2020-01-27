@@ -23,10 +23,6 @@ export class QuoteFormComponent implements OnInit {
 
   events = 'poi';
 
-  thongyChanged(type: string, event: MatDatepickerInputEvent<Date>) {
-    this.events = 'gesuntheight';
-  }
-
   serviceChanged(type: string) {
     this.events = type;
     //TODO: Check if user has previously added a bunch of cuts, and now just changed service type to Profile, in which case all cuts except first need to be deleted.

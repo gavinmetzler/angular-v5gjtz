@@ -30,7 +30,7 @@ flip grain 'button' above image, size input on left and bottom.
 		<br>
 
 		<mat-form-field class="dp xs">
-			<input matInput [matDatepicker]="reqDate" placeholder="Date required" (dateInput)="thongyChanged('input', $event)">
+			<input matInput [matDatepicker]="reqDate" placeholder="Date required" formControlName="reqDate">
 			<mat-datepicker-toggle matSuffix [for]="reqDate"></mat-datepicker-toggle>
 			<mat-datepicker #reqDate></mat-datepicker>
 		</mat-form-field>
