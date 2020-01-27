@@ -114,6 +114,7 @@ export class QuoteFormComponent implements OnInit {
          for (let loadtile in receivedformdata['tiles'])
          {
            console.log ('found a tile!');
+           console.log (loadtile['width']);
            for (let loadcut in loadtile['cuts'])
            {
              console.log ('found a cut!');
