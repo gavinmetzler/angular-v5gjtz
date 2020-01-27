@@ -101,6 +101,7 @@ export class QuoteFormComponent implements OnInit {
       tiles: this.fb.array([])
     },{ validators: identityRevealedValidator })
     this.addTile();
+    console.log ('ngOnInit run.');
        
     this.activatedRoute.queryParamMap.subscribe(queryParams => {
        if (queryParams.get("orderdata")) this.queryparams = queryParams.get("orderdata");
