@@ -104,8 +104,15 @@ export class QuoteFormComponent implements OnInit {
     console.log ('ngOnInit run.');
        
     this.activatedRoute.queryParamMap.subscribe(queryParams => {
-       if (queryParams.get("orderdata")) this.queryparams = queryParams.get("orderdata");
-        //should be no nulls, next line should fire twice, once logging 'empty' and again, if there is a query string with 'orderdata'
+      //this is going to run twice if there are query parameters. The first time there should be no Params, and they will be there on the second time.
+       if (queryParams.get("orderdata")) {
+         this.queryparams = queryParams.get("orderdata");
+         //UU decode, then JSON 
+         let decodedparams=atob(this.queryparams);
+         let receivedformdata=JSON.parse (decodedparams);
+         //eek, fingers crossed this works
+          this.myForm.setValue(receivedformdata);
+         }
        console.log (this.queryparams);
     });
 
