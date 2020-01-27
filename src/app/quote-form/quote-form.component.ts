@@ -109,7 +109,9 @@ export class QuoteFormComponent implements OnInit {
          this.queryparams = queryParams.get("orderdata");
          //UU decode, then JSON 
          let decodedparams=atob(this.queryparams);
+         console.log (decodedparams);
          let receivedformdata=JSON.parse (decodedparams);
+         console.log (receivedformdata);
          //eek, fingers crossed this works
           this.myForm.setValue(receivedformdata);
          }
