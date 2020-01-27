@@ -111,16 +111,21 @@ export class QuoteFormComponent implements OnInit {
          //Populate the array
          //First we have to find out how many tiles there are, and how many cuts in each tile.
          //We've already created 1 Tile with 1 Cut, so we need to addTile()
-         let tilecount = 1;
+         let tilecount = 0;
          for (let loadtile of receivedformdata['tiles'])
          {
            console.log ('found a tile.');
            console.log (tilecount);
-           let cutcount=1;
+            //add the Tile (if not the initial one we already have)
+            if (tilecount>0) {this.addTile();}
+
+           let cutcount=0;
            for (let loadcut of loadtile['cuts'])
            {
              console.log ('found a cut!');
              console.log (cutcount);
+             //add the cut (if not the first cut of the first tile)
+             if (tilecount==0 && cutcount==0) { this.addCut(tilecount);}
              cutcount++;
            }
            tilecount++;
