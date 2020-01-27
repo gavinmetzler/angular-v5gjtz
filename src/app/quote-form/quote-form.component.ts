@@ -113,7 +113,7 @@ export class QuoteFormComponent implements OnInit {
          //We've already created 1 Tile with 1 Cut, so we need to addTile()
          for (let loadtile in receivedformdata['tiles'])
          {
-           console.log ('found a tile! Its width is '.concat(loadtile['width'].tostring()));
+           console.log ('found a tile!');
            for (let loadcut in loadtile['cuts'])
            {
              console.log ('found a cut!');
