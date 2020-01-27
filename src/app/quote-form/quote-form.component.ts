@@ -98,7 +98,8 @@ export class QuoteFormComponent implements OnInit {
     },{ validators: identityRevealedValidator })
     this.addTile();
     console.log ('ngOnInit run.');
-       
+
+    //form data can be pre-populated from a UUencoded JSON object, submitted in a query string /?orderdata=UUASDF2A...   
     this.activatedRoute.queryParamMap.subscribe(queryParams => {
       //this is going to run twice if there are query parameters. The first time there should be no Params, and they will be there on the second time.
        if (queryParams.get("orderdata")) {
@@ -131,6 +132,7 @@ export class QuoteFormComponent implements OnInit {
            tilecount++;
          }
           this.myForm.setValue(receivedformdata);
+          this.profilechosen=true;
           //TODO: Encoding nested arrays worked fine, but decoding doesnt.
          }
        console.log (this.queryparams);
