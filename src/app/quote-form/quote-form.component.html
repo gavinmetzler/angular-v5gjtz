@@ -17,7 +17,7 @@ flip grain 'button' above image, size input on left and bottom.
 		</mat-error>
 	</mat-form-field>
 
-	<mat-form-field class="dp xs">
+	<mat-form-field class="dp ms">
 		<input matInput placeholder="Email" formControlName="email">
 		<mat-error *ngIf="email.invalid && email.touched" class="has-text-danger">
 			*please enter a valid email address
@@ -25,12 +25,16 @@ flip grain 'button' above image, size input on left and bottom.
 	</mat-form-field>
 
 	<mat-form-field class="dp xs">
+		<input matInput placeholder="Phone no" formControlName="phone">
+  </mat-form-field>
+
+	<mat-form-field class="dp xs">
 		<input matInput placeholder="Company" formControlName="company">
   </mat-form-field>
-		<br>
+		
 
 		<mat-form-field class="dp xs">
-			<input matInput [matDatepicker]="reqDate" placeholder="Date required" formControlName="reqDate">
+			<input matInput [matDatepicker]="reqDate" [matDatepickerFilter]="myFilter" [min]="minDate"  placeholder="Date required" formControlName="reqDate">
 			<mat-datepicker-toggle matSuffix [for]="reqDate"></mat-datepicker-toggle>
 			<mat-datepicker #reqDate></mat-datepicker>
 		</mat-form-field>
@@ -298,29 +302,10 @@ flip grain 'button' above image, size input on left and bottom.
 									</div>
 									<div *ngIf="!profilechosen || tile['controls'].profileType.value=='apronmitred'">
 										<mat-grid-tile>
-											<svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible"
-												version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-												<path d="M328.1852,96.10715 L339.1022,115.0161 L317.2681,115.0161 z"
-													stroke="Black" stroke-width="0" fill="#FF0000" fill-opacity="1.0" />
-												<path d="M328.1852,263.8929 L317.2681,244.9839 L339.1022,244.9839 z"
-													stroke="Black" stroke-width="0" fill="#FF0000" fill-opacity="1.0" />
-												<path
-													d="M281.425,146.4429 L281.425,152.0357 L1.782178,152.0357 L1.782178,96.10715 L231.0893,96.10715 C242.8304,95.79501 256.9554,101.1235 266.682,110.8501 C276.4087,120.5768 281.7372,134.7017 281.425,146.4429 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-												<text x="318.07962031608" y="192.473278381272" font-family="Arial"
-													font-size="38.90684">a</text>
-												<path
-													d="M281.425,263.8929 L281.425,152.0357 L225.4965,152.0357 L225.4965,263.8929 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-												<path d="M328.1852,159.17 L328.1852,96.10717" stroke="#FF0000"
-													stroke-width="5.76" fill-opacity="0" />
-												<path d="M293.5328,96.10717 L358.2178,96.10717" stroke="#FF0000"
-													stroke-width="5.76" fill-opacity="0" />
-												<path d="M304.4305,263.8929 L358.2178,263.8929" stroke="#FF0000"
-													stroke-width="5.76" fill-opacity="0" />
-												<path d="M328.1852,200.8301 L328.1852,263.8929" stroke="#FF0000"
-													stroke-width="5.76" fill-opacity="0" />
-											</svg>
+                      <svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M351.954,79.33316 C348.1374,75.41315 342.3023,72.99619 336.8317,73.06931 L1.782178,73.06931 L1.782178,144.3564 L286.9307,144.3564 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                        <path d="M358.2178,94.45544 C358.2909,88.98483 355.874,83.14978 351.954,79.33316 L286.9307,144.3564 L286.9307,286.9307 L358.2178,286.9307 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
+                      </svg>
 											<mat-grid-tile-footer>
 												<mat-radio-button class="lp" value="apronmitred">Apron Mitred
 												</mat-radio-button>
@@ -329,9 +314,9 @@ flip grain 'button' above image, size input on left and bottom.
 									</div>
 								</mat-radio-group>
 							</mat-grid-list>
-							<!--    <mat-form-field class="xs" *ngIf="tile['controls'].profileType.value==='apronmitred') || (tile['controls'].profileType.value==='apronhalfbullnose') || (tile['controls'].profileType.value==='apronbevelled') || (tile['controls'].profileType.value==='apronpencilround')">
+							<mat-form-field class="xs" *ngIf="tile['controls'].profileType.value=='apronmitred' || tile['controls'].profileType.value=='apronhalfbullnose' || tile['controls'].profileType.value=='apronbevelled' || tile['controls'].profileType.value=='apronpencilround'">
                       <input matInput type="number" placeholder="Apron Height(a)(mm)" formControlName="apronHeight">
-                    </mat-form-field>-->
+              </mat-form-field>
 						</div>
 
 						<!--
@@ -358,11 +343,11 @@ flip grain 'button' above image, size input on left and bottom.
             </mat-radio-group>-->
 
 
-								<div style="height: 70px; border-style:none; float:left">
+								<div style=" border-style:none; float:left">
 									<mat-form-field class="xss">
 										<input matInput type="number" placeholder="Quantity" formControlName="quantity">
                     </mat-form-field>
-										<span *ngIf="tile['controls'].service.value!='profile'" >
+									<span *ngIf="tile['controls'].service.value!='profile'" >
                     <mat-form-field class="xs">
                       <input matInput type="number" placeholder="Cut size (A)" formControlName="dim1" (change)="tileCutChanged(i, j, 'dim1')">
                     </mat-form-field>

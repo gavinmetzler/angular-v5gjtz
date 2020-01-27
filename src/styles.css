@@ -31,6 +31,11 @@ body {
     display: block;
 }
 
+.ms {
+    margin-right: 15px;
+    width: 15em;
+}
+
 .xs {
     margin-right: 15px;
     width: 10em;

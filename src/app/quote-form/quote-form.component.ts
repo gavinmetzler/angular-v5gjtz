@@ -22,6 +22,13 @@ export class QuoteFormComponent implements OnInit {
   queryparams = 'empty';
 
   events = 'poi';
+  
+  myFilter = (d: Date): boolean => {
+    const day = d.getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0;
+  }
+  minDate = new Date();
 
   serviceChanged(type: string) {
     this.events = type;
@@ -48,8 +55,8 @@ export class QuoteFormComponent implements OnInit {
       let dispheight = 180;
       let dispwidth = 180;
       let miniwidth = 100;
-      if (lenny>widdy) { dispwidth = 130; miniwidth = 70; }
-      if (lenny<widdy) { dispheight = 130; miniwidth = 150; }
+      if (lenny>widdy) { dispwidth = 110; miniwidth = 70; }
+      if (lenny<widdy) { dispheight = 110; miniwidth = 150; }
 
       (<FormArray>this.myForm.controls['tiles']).at(i).get("dispheight").setValue(dispheight); 
       (<FormArray>this.myForm.controls['tiles']).at(i).get("dispwidth").setValue(dispwidth); 
@@ -91,6 +98,7 @@ export class QuoteFormComponent implements OnInit {
     this.myForm = this.fb.group ({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
+      phone: [''],
       company: ['', [Validators.required, forbiddenNameValidator(/bob/i)]],
       orderNum: '',
       reqDate: '',
