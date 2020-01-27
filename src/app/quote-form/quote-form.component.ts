@@ -125,7 +125,11 @@ export class QuoteFormComponent implements OnInit {
              console.log ('found a cut!');
              console.log (cutcount);
              //add the cut (if not the first cut of the first tile)
-             if (tilecount!=0 && cutcount!=0) { this.addCut(tilecount);}
+             if (tilecount==0 && cutcount==0) { console.log ('first cut of first tile already added, skipping.') }
+             else
+             {
+                this.addCut(tilecount);
+             }
              cutcount++;
            }
            tilecount++;
