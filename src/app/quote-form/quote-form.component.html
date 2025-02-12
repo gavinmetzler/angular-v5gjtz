@@ -119,37 +119,11 @@ flip grain 'button' above image, size input on left and bottom.
 							<div *ngIf="profilechosen">
 								<button mat-raised-button type="button" (click)="profileChosen(false);">choose a different profile</button>
 							</div>
-							<mat-grid-list cols="4" rowHeight="120pt">
+							<mat-grid-list cols="3" rowHeight="120pt">
 								<mat-radio-group formControlName="profileType" aria-label="Select a profile" class="xs"
 									(change)="profileChosen(true);">
 
-									<div *ngIf="!profilechosen || tile['controls'].profileType.value=='pencilround'">
-										<mat-grid-tile>
-											<svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible"
-												version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-												<path
-													d="M336.8317,144.3564 L1.782178,144.3564 L1.782178,215.6436 L358.2178,215.6436 L358.2178,165.7426 C358.3504,160.7541 356.0865,154.7529 351.954,150.6203 C347.8214,146.4877 341.8201,144.2238 336.8317,144.3564 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" /></svg><br>
-											<mat-grid-tile-footer>
-												<mat-radio-button class="lp" value="pencilround">Pencil Round
-												</mat-radio-button>
-											</mat-grid-tile-footer>
-										</mat-grid-tile>
-									</div>
-									<div *ngIf="!profilechosen || tile['controls'].profileType.value=='bevelled'">
-										<mat-grid-tile>
-											<svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible"
-												version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-												<path
-													d="M1.782178,215.6436 L358.2178,215.6436 L358.2178,158.6139 L343.9604,144.3564 L1.782178,144.3564 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-											</svg><br>
-											<mat-grid-tile-footer>
-												<mat-radio-button class="lp" value="bevelled">Bevelled
-												</mat-radio-button>
-											</mat-grid-tile-footer>
-										</mat-grid-tile>
-									</div>
+
 									<div *ngIf="!profilechosen || tile['controls'].profileType.value=='halfbullnose'">
 										<mat-grid-tile>
 											<svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible"
@@ -159,7 +133,7 @@ flip grain 'button' above image, size input on left and bottom.
 													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
 											</svg>
 											<mat-grid-tile-footer>
-												<mat-radio-button class="lp" value="halfbullnose">Half Bullnose
+												<mat-radio-button class="lp" value="halfbullnose">Half Bullnose (ST3)
 												</mat-radio-button>
 											</mat-grid-tile-footer>
 										</mat-grid-tile>
@@ -173,7 +147,7 @@ flip grain 'button' above image, size input on left and bottom.
 													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
 											</svg>
 											<mat-grid-tile-footer>
-												<mat-radio-button class="lp" value="fullbullnose">Full Bullnose
+												<mat-radio-button class="lp" value="fullbullnose">Bullnose (ST6)
 												</mat-radio-button>
 											</mat-grid-tile-footer>
 										</mat-grid-tile>
@@ -192,46 +166,12 @@ flip grain 'button' above image, size input on left and bottom.
 											</svg>
 											<mat-grid-tile-footer>
 												<mat-radio-button class="lp" value="laminatedpencilround">Laminated
-													Pencil Round</mat-radio-button>
+													(FL4)</mat-radio-button>
 											</mat-grid-tile-footer>
 										</mat-grid-tile>
 									</div>
-									<div
-										*ngIf="!profilechosen || tile['controls'].profileType.value=='laminatedbevelled'">
-										<mat-grid-tile>
-											<svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible"
-												version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-												<path
-													d="M1.782178,180 L358.2178,180 L358.2178,122.9703 L343.9604,108.7129 L1.782178,108.7129 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-												<path
-													d="M215.6436,251.2872 L358.2178,251.2872 L358.2178,180 L215.6436,180 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-											</svg>
-											<mat-grid-tile-footer>
-												<mat-radio-button class="xs" value="laminatedbevelled">Laminated
-													Bevelled</mat-radio-button>
-											</mat-grid-tile-footer>
-										</mat-grid-tile>
-									</div>
-									<div
-										*ngIf="!profilechosen || tile['controls'].profileType.value=='laminatedhalfbullnose'">
-										<mat-grid-tile>
-											<svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible"
-												version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-												<path
-													d="M358.2178,172.8713 L358.2178,180 L1.782178,180 L1.782178,108.7129 L294.0594,108.7129 C309.0248,108.315 327.0285,115.1067 339.4263,127.5044 C351.824,139.9022 358.6157,157.9059 358.2178,172.8713 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-												<path
-													d="M215.6436,251.2872 L358.2178,251.2872 L358.2178,180 L215.6436,180 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-											</svg>
-											<mat-grid-tile-footer>
-												<mat-radio-button class="lp" value="laminatedhalfbullnose">Laminated
-													Half Bullnose</mat-radio-button>
-											</mat-grid-tile-footer>
-										</mat-grid-tile>
-									</div>
+
+
 									<div
 										*ngIf="!profilechosen || tile['controls'].profileType.value=='laminatedfullbullnose'">
 										<mat-grid-tile>
@@ -242,46 +182,12 @@ flip grain 'button' above image, size input on left and bottom.
 													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
 											</svg>
 											<mat-grid-tile-footer>
-												<mat-radio-button class="lp" value="laminatedfullbullnose">Laminated
-													Full Bullnose</mat-radio-button>
+												<mat-radio-button class="lp" value="laminatedfullbullnose">Lam
+													Bullnose (FL6)</mat-radio-button>
 											</mat-grid-tile-footer>
 										</mat-grid-tile>
 									</div>
-									<div
-										*ngIf="!profilechosen || tile['controls'].profileType.value=='apronpencilround'">
-										<mat-grid-tile>
-											<svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible"
-												version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-												<path
-													d="M336.8317,73.06931 L1.782178,73.06931 L1.782178,144.3564 L358.2178,144.3564 L358.2178,94.45544 C358.3504,89.46699 356.0865,83.46574 351.954,79.33316 C347.8214,75.20058 341.8201,72.93669 336.8317,73.06931 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-												<path
-													d="M358.2178,286.9307 L358.2178,144.3565 L286.9307,144.3565 L286.9307,286.9307 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-											</svg>
-											<mat-grid-tile-footer>
-												<mat-radio-button class="lp" value="apronpencilround">Apron Pencil Round
-												</mat-radio-button>
-											</mat-grid-tile-footer>
-										</mat-grid-tile>
-									</div>
-									<div *ngIf="!profilechosen || tile['controls'].profileType.value=='apronbevelled'">
-										<mat-grid-tile>
-											<svg width="100pt" height="100pt" viewBox="0 0 360 360" overflow="visible"
-												version="1.1" fill="#0094d9" xmlns="http://www.w3.org/2000/svg">
-												<path
-													d="M1.782178,144.3564 L358.2178,144.3564 L358.2178,87.32674 L343.9604,73.06931 L1.782178,73.06931 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-												<path
-													d="M358.2178,286.9307 L358.2178,144.3565 L286.9307,144.3565 L286.9307,286.9307 z"
-													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
-											</svg>
-											<mat-grid-tile-footer>
-												<mat-radio-button class="lp" value="apronbevelled">Apron Bevelled
-												</mat-radio-button>
-											</mat-grid-tile-footer>
-										</mat-grid-tile>
-									</div>
+
 									<div
 										*ngIf="!profilechosen || tile['controls'].profileType.value=='apronhalfbullnose'">
 										<mat-grid-tile>
@@ -295,8 +201,8 @@ flip grain 'button' above image, size input on left and bottom.
 													stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
 											</svg>
 											<mat-grid-tile-footer>
-												<mat-radio-button class="lp" value="apronhalfbullnose">Apron Half
-													Bullnose</mat-radio-button>
+												<mat-radio-button class="lp" value="apronhalfbullnose">Apron (SSB2)
+													</mat-radio-button>
 											</mat-grid-tile-footer>
 										</mat-grid-tile>
 									</div>
@@ -307,7 +213,7 @@ flip grain 'button' above image, size input on left and bottom.
                         <path d="M358.2178,94.45544 C358.2909,88.98483 355.874,83.14978 351.954,79.33316 L286.9307,144.3564 L286.9307,286.9307 L358.2178,286.9307 z" stroke="#0094D9" stroke-width="5.76" fill-opacity="0" />
                       </svg>
 											<mat-grid-tile-footer>
-												<mat-radio-button class="lp" value="apronmitred">Apron Mitred
+												<mat-radio-button class="lp" value="apronmitred">Mitred (45LSQ)
 												</mat-radio-button>
 											</mat-grid-tile-footer>
 										</mat-grid-tile>
